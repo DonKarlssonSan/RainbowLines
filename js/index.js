@@ -123,8 +123,11 @@ gui.add(options, "leaveTrace")
   .name("Leave trace forever");
 gui.add(options, "startStop")
   .name("Start/Stop");
-gui.add(options, "fullscreen")
-  .name("Fullscreen");
+if (typeof Windows === "undefined") {
+  // Does not work in Windows 10 app, hide it
+  gui.add(options, "fullscreen")
+    .name("Fullscreen");
+}
 gui.add(options, "reset")
   .name("Reset");
 
