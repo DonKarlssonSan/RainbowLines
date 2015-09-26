@@ -72,6 +72,18 @@ function run() {
   }
 }
 
+function fullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    elem.msRequestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
+  }
+}
+
 var Options = function() {
   this.nrOfPoints = 10;
   this.speedBoost = 1;
@@ -84,6 +96,9 @@ var Options = function() {
     if(!this.pause) {
       run();
     }
+  };
+  this.fullscreen = function() {
+    fullscreen(canvas);
   };
 };
 
@@ -108,7 +123,10 @@ gui.add(options, "leaveTrace")
   .name("Leave trace forever");
 gui.add(options, "startStop")
   .name("Start/Stop");
-gui.add(options, "reset").name("Reset");
+gui.add(options, "fullscreen")
+  .name("Fullscreen");
+gui.add(options, "reset")
+  .name("Reset");
 
 reset();
 run();
